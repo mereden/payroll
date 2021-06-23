@@ -1,0 +1,67 @@
+PayCal.ocx is a simple payroll component.
+It is designed for the Philippines Payroll market.
+
+There is a simple Vb6 test project included to try out the component.
+If you examine the source code of the test project it will help you to use this component in your own project.
+Register the component on your computer and add it to the components pallet in Vb6. Then just Drop it onto a new Form. It can be used straight away.
+
+If you register PayCal.ocx to a different folder than your vb6 project folder then you may need to copy the Database and the Reports folders to the same folder where you registered the ocx if you are working with Windows 8.1 Pro.
+
+For help on using the control from a user's perspective see the html help file in the 'Help' folder.
+
+If you are trying out PayCal in your own project try these steps:
+From within the Visual Basic 6.0 IDE Right-click on the components tool bar and click components... From the list scroll down until you come to the 
+Project1 Select Project1 from the list and look at the address and file at that location . If it says PayCal.ocx then click apply. The PayCal component 
+should appear on your components tool bar. Drag and drop it onto a new form.
+
+To analyse the output of the PayCal component from a programmers perspective see the simple Test project source code. 
+Here is the subroutine that outputs the strings from the MSFlexGrid
+
+Private Sub Display_Strings_Click()
+'Output the contents of the MSFlexGrid inside the PayCal.ocx component
+'using Debug.print to the immediate window.
+'
+'When you call PayCal1.FlexGridMatrix you receive a two dimensional string array
+'of 26 rows and 4 columns. By analysing the array you can see the details of the
+'Generated payslip.
+'
+    Dim r As Integer, c As Integer
+    
+    'Declare a dynamic String array. You don't need to specify the dimensions
+    'At this stage it is just a String array pointer
+    Dim mGrid() As String
+    Dim sp As String * 40
+
+    mGrid = PayCal1.FlexGridMatrix
+    'The dynamic string array you declared now points to a two dimensional string array
+    'Its contents come from a copy of the contents of the MSFlexGrid within the PayCal.ocx
+    
+    'The following is an example of how to display the string array.
+    Debug.Print "-------------Start---------------"
+
+    For r = 1 To 26
+        For c = 1 To 4
+            If c = 1 Then
+                Debug.Print Left$(mGrid(r, c) & sp, 33);        'Left align 1st column
+            Else
+                Debug.Print Right$(sp & mGrid(r, c), 14);       'Right align remaining columns
+            End If
+        Next c
+        Debug.Print
+    Next r
+
+    Debug.Print "-------------Finished--------------"
+
+End Sub
+
+PayCal.ocx was tested on Windows XP Professional and Windows 8.1 Professional
+
+There is an Excel spreadsheet workbook inside the folder 'The Excel Version'
+It uses the same PayCal OCX to demonstrate how you can copy the results of the Payroll calculations to a spreadsheet. See the 'read me.txt' file inside that folder for more information.
+
+To register the OCX on Windows 8.1pro right-click on the bat file "Register_OCXs.bat" and choose Run as Administrator
+
+Michael Finnegan
+Thursday 11 June 2015
+
+
